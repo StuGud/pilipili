@@ -1,0 +1,7 @@
+spring:
+  #数据库
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/pilipili?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: Wangwei1114
+    driver-class-name: com.mysql.cj.jdbc.Driver
