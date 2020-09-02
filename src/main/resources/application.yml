@@ -5,3 +5,16 @@ spring:
     username: root
     password: Wangwei1114
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  mail:
+    host: smtp.163.com
+    username: dispatchertest@163.com
+    password: YAXMHJEHDHWSGULA
+    default-encoding: UTF-8
+
+mail:
+  fromMail:
+    addr: dispatchertest@163.com

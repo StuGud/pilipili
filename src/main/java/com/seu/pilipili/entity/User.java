@@ -1,6 +1,7 @@
 package com.seu.pilipili.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
  * 用户基本信息
  */
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "t_user")
 public class User {

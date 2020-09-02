@@ -1,18 +1,18 @@
 package com.seu.pilipili.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * 评论
  */
 @Data
+@NoArgsConstructor
 @Entity
+@Table(name = "t_comment")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

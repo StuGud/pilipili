@@ -19,7 +19,7 @@ create table if not exists t_movie
     imageDirectory varchar(128) not null ,
     movieURL varchar(128) not null ,
     level varchar(8) not null default '普通电影',
-    score int,
+    score double default 10,
     scoreNum int default 0
 );
 

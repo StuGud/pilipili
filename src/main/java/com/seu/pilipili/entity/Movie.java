@@ -1,14 +1,16 @@
 package com.seu.pilipili.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Table(name = "t_movie")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,7 +34,7 @@ public class Movie {
     /**
      *评分    10分制？
      */
-    private int score;
+    private double score;
     /**
      * 参与评价的人数
      */
