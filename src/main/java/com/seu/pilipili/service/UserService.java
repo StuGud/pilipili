@@ -1,6 +1,7 @@
 package com.seu.pilipili.service;
 
 import com.seu.pilipili.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 //注册，是否存在用户名，登陆
 public interface UserService {
@@ -24,4 +25,12 @@ public interface UserService {
      * @return
      */
     User modifyApprovalNum(long userId,boolean change);
+
+    /**
+     * 修改头像
+     * @param userId
+     * @param newProfile
+     * @return
+     */
+    User setProfile(long userId, MultipartFile newProfile);
 }

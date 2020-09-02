@@ -5,6 +5,7 @@ import com.seu.pilipili.repo.UserRepo;
 import com.seu.pilipili.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -64,5 +65,11 @@ public class UserServiceImpl implements UserService {
             user.setApprovalNum(approvalNum-1);
         }
         return userRepo.save(user);
+    }
+
+    @Override
+    public User setProfile(long userId, MultipartFile newProfile) {
+        User user = userRepo.findById(userId).get();
+        return null;
     }
 }

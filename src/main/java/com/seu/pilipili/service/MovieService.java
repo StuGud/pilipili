@@ -1,6 +1,7 @@
 package com.seu.pilipili.service;
 
 import com.seu.pilipili.entity.Movie;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,4 +15,14 @@ public interface MovieService {
     Movie modify(Movie movie);
     Movie modifyScore(long movieId,int newScore,int newScoreNum);
     List<Movie> getAllMovies();
+
+    /**
+     * 设置电影封面
+     * @param movieId
+     * @param newProfile
+     * @return
+     */
+    Movie setImageDirectory(long movieId, MultipartFile newProfile);
+
+    byte[] getImage(long movieId);
 }
