@@ -142,14 +142,20 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movie> getList(int page) {
+    public List<Movie> getPageByRandom(int page) {
         Pageable pageable =PageRequest.of(page,size);
         return  movieRepo.findAll(pageable).getContent();
     }
 
     @Override
-    public List<Movie> getListSortedByScoreDESC(int page) {
+    public List<Movie> getPageByScoreDESC(int page) {
         Pageable pageable =PageRequest.of(page,size,Sort.by(Sort.Direction.DESC,"score"));
         return movieRepo.findAll(pageable).getContent();
+    }
+
+    @Override
+    public List<Movie> getPageByName(String name,int page) {
+        Pageable pageable =PageRequest.of(page,size);
+        return movieRepo.findByNameLike("%"+name+"%",pageable);
     }
 }

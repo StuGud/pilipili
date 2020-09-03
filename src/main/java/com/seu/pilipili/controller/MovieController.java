@@ -1,5 +1,6 @@
 package com.seu.pilipili.controller;
 
+import com.seu.pilipili.entity.Movie;
 import com.seu.pilipili.service.MovieService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -8,10 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
-@RequestMapping("/movie")
 public class MovieController {
     final
     MovieService movieService;
@@ -25,10 +27,29 @@ public class MovieController {
      * @param movieId
      * @return
      */
-    @GetMapping("/image/{movieId}")
+    @GetMapping("/movie/image/{movieId}")
     public ResponseEntity<byte[]> getMovieImage(@PathVariable("movieId") long movieId){
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<>(movieService.getImage(movieId), headers, HttpStatus.OK);
     }
+
+    @GetMapping("/movies/findByNameLike/{page}")
+    @ResponseBody
+    public List<Movie> showPage(String name,@PathVariable("page") int page){
+        return movieService.getPageByName(name, page);
+    }
+
+    @GetMapping("/movies/random/{page}")
+    @ResponseBody
+    public List<Movie> showMovies(@PathVariable("page") int page){
+        return movieService.getPageByRandom(page);
+    }
+
+    @GetMapping("/movies/scoreDESC/{page}")
+    @ResponseBody
+    public List<Movie> showMoviesByScoreDESC(@PathVariable("page") int page){
+        return movieService.getPageByScoreDESC(page);
+    }
+
 }

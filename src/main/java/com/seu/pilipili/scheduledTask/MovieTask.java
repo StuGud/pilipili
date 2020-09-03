@@ -39,7 +39,9 @@ public class MovieTask {
                     scoreSum+=comment.getScore();
                 }
             }
-            movieService.modifyScore(movie.getId(),scoreSum/scoreNum,scoreNum);
+            if (scoreNum!=0) {
+                movieService.modifyScore(movie.getId(), scoreSum / scoreNum, scoreNum);
+            }
         }
 
     }

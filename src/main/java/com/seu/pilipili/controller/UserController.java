@@ -4,9 +4,8 @@ import com.seu.pilipili.entity.User;
 import com.seu.pilipili.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -22,9 +21,18 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public User login(@RequestBody User user){
-        //User loginUser = userService.login(user.getUsername(), user.getPassword());
-        //return loginUser;
-        return testUser;
+    @ResponseBody
+    public User login(User user){
+        User loginUser = userService.login(user.getUsername(), user.getPassword());
+        loginUser.setPassword("你猜");
+        return loginUser;
     }
+
+    @PostMapping("/register")
+    @ResponseBody
+    public User register(User user){
+        User registerUser = userService.register(user);
+        return registerUser;
+    }
+
 }

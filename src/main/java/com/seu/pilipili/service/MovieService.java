@@ -31,12 +31,14 @@ public interface MovieService {
      * @param page
      * @return
      */
-    List<Movie> getList(int page);
+    List<Movie> getPageByRandom(int page);
 
     /**
      * 按得分降序排列
      * @param page
      * @return
      */
-    List<Movie> getListSortedByScoreDESC(int page);
+    List<Movie> getPageByScoreDESC(int page);
+
+    List<Movie> getPageByName(String name,int page);
 }
