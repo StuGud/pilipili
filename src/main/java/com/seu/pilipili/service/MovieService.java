@@ -16,6 +16,7 @@ public interface MovieService {
     Movie modifyScore(long movieId,int newScore,int newScoreNum);
     List<Movie> getAllMovies();
 
+    Movie getByMovieId(long movieId);
     /**
      * 设置电影封面
      * @param movieId
@@ -41,4 +42,6 @@ public interface MovieService {
     List<Movie> getPageByScoreDESC(int page);
 
     List<Movie> getPageByName(String name,int page);
+
+    List<Movie> getPageByClassification(String classification,int page);
 }

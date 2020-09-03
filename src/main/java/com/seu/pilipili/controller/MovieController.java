@@ -52,4 +52,10 @@ public class MovieController {
         return movieService.getPageByScoreDESC(page);
     }
 
+    @GetMapping("/movies/classification/{classification}/{page}")
+    @ResponseBody
+    public List<Movie> showMoviesByClassification(@PathVariable("classification") String classification,@PathVariable("page") int page){
+        return movieService.getPageByClassification(classification,page);
+    }
+
 }

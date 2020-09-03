@@ -43,11 +43,11 @@ public class UserServiceImpl implements UserService {
         if(user.getPassword()!=null){
             save.setPassword(user.getPassword());
         }
-        if (user.getPhone()!=null){
-            save.setPhone(user.getPhone());
+        if (user.getMail()!=null){
+            save.setMail(user.getMail());
         }
         if(user.getLevel()!=null){
-            save.setPhone(user.getLevel());
+            save.setLevel(user.getLevel());
         }
         if (user.getProfileURL()!=null){
             save.setProfileURL(user.getProfileURL());

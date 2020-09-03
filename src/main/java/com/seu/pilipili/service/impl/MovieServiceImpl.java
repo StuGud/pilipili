@@ -158,4 +158,15 @@ public class MovieServiceImpl implements MovieService {
         Pageable pageable =PageRequest.of(page,size);
         return movieRepo.findByNameLike("%"+name+"%",pageable);
     }
+
+    @Override
+    public Movie getByMovieId(long movieId) {
+        return movieRepo.findById(movieId).get();
+    }
+
+    @Override
+    public List<Movie> getPageByClassification(String classification,int page) {
+        Pageable pageable =PageRequest.of(page,size);
+        return movieRepo.findAllByClassification(classification,pageable);
+    }
 }

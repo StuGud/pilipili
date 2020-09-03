@@ -20,7 +20,7 @@ public class User {
     private long id;
     private String username;
     private String password;
-    private String phone;
+    private String mail;
     /**
      * 用户级别
      */

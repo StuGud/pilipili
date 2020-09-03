@@ -3,7 +3,7 @@ create table if not exists t_user
     id bigint not null primary key auto_increment,
     username varchar(32) not null ,
     password varchar(16) not null ,
-    phone varchar(16) not null ,
+    mail varchar(64) not null ,
     level varchar(8) not null default '普通会员',
     profileURL varchar(128) not null,
     approvalNum int not null default 3
