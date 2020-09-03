@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment newComment(Comment comment) {
+        if(comment.getScore()<0){
+            comment.setScore(5);
+        }else if (comment.getScore()>10){
+            comment.setScore(10);
+        }
+        comment.setApprovalNum(0);
+        comment.setCreatedAt(new Date());
         return commentRepo.save(comment);
     }
 
