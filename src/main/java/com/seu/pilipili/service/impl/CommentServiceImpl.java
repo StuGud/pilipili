@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -70,5 +71,11 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> getPageSortedByApprovalNumDESC(int page) {
         Pageable pageable = PageRequest.of(page,size, Sort.by(Sort.Direction.DESC,"approvalNum"));
         return  commentRepo.findAll(pageable).getContent();
+    }
+
+    @Override
+    public Comment getByCommentId(long commentId) {
+        Optional<Comment> comment = commentRepo.findById(commentId);
+        return comment.get();
     }
 }

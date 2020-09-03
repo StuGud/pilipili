@@ -47,4 +47,11 @@ public interface CommentService {
      * @return
      */
     List<Comment> getPageSortedByApprovalNumDESC(int page);
+
+    /**
+     * 根据评论号找到对应评论
+     * @param commentId
+     * @return
+     */
+    Comment getByCommentId(long commentId);
 }
