@@ -3,6 +3,7 @@ package com.seu.pilipili.service;
 import com.seu.pilipili.entity.Movie;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 public interface MovieService {
@@ -25,7 +26,9 @@ public interface MovieService {
      */
     Movie setImageDirectory(long movieId, MultipartFile newProfile);
 
-    byte[] getImage(long movieId);
+    byte[] getImageByte(long movieId);
+
+    File getImageFile(long movieId);
 
     /**
      * 随机分页

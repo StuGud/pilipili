@@ -3,6 +3,8 @@ package com.seu.pilipili.service;
 import com.seu.pilipili.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+
 //注册，是否存在用户名，登陆
 public interface UserService {
     User register(User user);
@@ -33,4 +35,6 @@ public interface UserService {
      * @return
      */
     User setProfile(long userId, MultipartFile newProfile);
+
+    File getProfile(long userId);
 }

@@ -21,8 +21,10 @@ import java.util.Optional;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    public static final String WINDOWS_PROFILES_PATH = "D:/pilipili/profiles/";
-    public static final String MAC_PROFILES_PATH = "/Users/Gud/Workspace/temporaryFile/profiles/";
+    @Value("${pilipili.profilePath.WIN}")
+    String WINDOWS_PROFILES_PATH;
+    @Value("${pilipili.profilePath.MAC}")
+    String MAC_PROFILES_PATH;
 
     @Value("${pilipili.movie.page.size}")
     int size;
@@ -124,7 +126,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public byte[] getImage(long movieId) {
+    public byte[] getImageByte(long movieId) {
         String OSName = System.getProperty("os.name");
         String profilesPath = OSName.toLowerCase().startsWith("win") ? WINDOWS_PROFILES_PATH
                 : MAC_PROFILES_PATH;
@@ -139,6 +141,18 @@ public class MovieServiceImpl implements MovieService {
             }
         }
         return imageContent;
+    }
+
+    @Override
+    public File getImageFile(long movieId) {
+        String OSName = System.getProperty("os.name");
+        String profilesPath = OSName.toLowerCase().startsWith("win") ? WINDOWS_PROFILES_PATH
+                : MAC_PROFILES_PATH;
+        Optional<Movie> movie=movieRepo.findById(movieId);
+        if(movie.isPresent()){
+            return new File(profilesPath+movie.get().getImageDirectory());
+        }
+        return null;
     }
 
     @Override

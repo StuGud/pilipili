@@ -3,14 +3,20 @@ package com.seu.pilipili.service.impl;
 import com.seu.pilipili.entity.User;
 import com.seu.pilipili.repo.UserRepo;
 import com.seu.pilipili.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Value("${pilipili.profilePath.WIN}")
+    String WINDOWS_PROFILES_PATH;
+    @Value("${pilipili.profilePath.MAC}")
+    String MAC_PROFILES_PATH;
 
     final
     UserRepo userRepo;
@@ -70,6 +76,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User setProfile(long userId, MultipartFile newProfile) {
         User user = userRepo.findById(userId).get();
+        return null;
+    }
+
+    @Override
+    public File getProfile(long userId) {
+        String OSName = System.getProperty("os.name");
+        String profilesPath = OSName.toLowerCase().startsWith("win") ? WINDOWS_PROFILES_PATH
+                : MAC_PROFILES_PATH;
+        Optional<User> user=userRepo.findById(userId);
+        if(user.isPresent()){
+            String imageDirectory=user.get().getProfileURL();
+            return new File(profilesPath+imageDirectory);
+        }
         return null;
     }
 }
