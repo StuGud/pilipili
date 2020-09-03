@@ -58,4 +58,10 @@ public class MovieController {
         return movieService.getPageByClassification(classification,page);
     }
 
+    @GetMapping("/movie/{movieId}")
+    @ResponseBody
+    public Movie showMovieByMovieId(@PathVariable("movieId") long movieId){
+        return movieService.getByMovieId(movieId);
+    }
+
 }
