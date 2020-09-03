@@ -36,10 +36,10 @@ public class MovieTask {
     @Scheduled(fixedRate = 24*60*60*1000)
     public void calculateScore(){
         System.out.println("开始计算电影评分");
-        int scoreSum=0;
-        int scoreNum=0;
         List<Movie> movies = movieService.getAllMovies();
         for (Movie movie : movies) {
+            int scoreSum=0;
+            int scoreNum=0;
             List<Comment> comments = commentService.getCommentsByMovieId(movie.getId());
             for (Comment comment : comments) {
                 if (comment.getScore()>=0&&comment.getScore()<=10){

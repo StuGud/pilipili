@@ -12,6 +12,6 @@
 #        (1,'肖申克的救赎','剧情',142,'20世纪40年代末，小有成就的青年银行家安迪因涉嫌杀害妻子及她的情人而锒铛入狱。',
 #         '/directory','/directory','会员电影',9.7,1200);
 
-insert into t_comment(id, userId, movieId, score, content, createdAt, approvalNum)
-values (1,1,1,9.0,'第1号评论：user1对movie1的评论','2020-9-1',666),
-       (2,2,2,9.9,'第2号评论：user2对movie2的评论','2020-9-2',233);
+# insert into t_comment(id, userId, movieId, score, content, createdAt, approvalNum)
+# values (1,1,1,9.0,'第1号评论：user1对movie1的评论','2020-9-1',666),
+#        (2,2,2,9.9,'第2号评论：user2对movie2的评论','2020-9-2',233);
