@@ -25,4 +25,18 @@ public interface MovieService {
     Movie setImageDirectory(long movieId, MultipartFile newProfile);
 
     byte[] getImage(long movieId);
+
+    /**
+     * 随机分页
+     * @param page
+     * @return
+     */
+    List<Movie> getList(int page);
+
+    /**
+     * 按得分降序排列
+     * @param page
+     * @return
+     */
+    List<Movie> getListSortedByScoreDESC(int page);
 }

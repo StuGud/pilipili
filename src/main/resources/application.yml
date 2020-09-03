@@ -18,3 +18,15 @@ spring:
 mail:
   fromMail:
     addr: dispatchertest@163.com
+
+#自定义变量
+pilipili:
+  profilePath:
+    WIN: D:/pilipili/profiles/
+    MAC: /Users/Gud/Workspace/temporaryFile/profiles/
+  movie:
+    page:
+      Size: 10
+  comment:
+    page:
+      size: 20

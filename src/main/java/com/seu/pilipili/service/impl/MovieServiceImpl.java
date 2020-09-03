@@ -4,6 +4,10 @@ import com.seu.pilipili.entity.Movie;
 import com.seu.pilipili.repo.MovieRepo;
 import com.seu.pilipili.service.MovieService;
 import com.seu.pilipili.util.FileUtil;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +23,9 @@ public class MovieServiceImpl implements MovieService {
 
     public static final String WINDOWS_PROFILES_PATH = "D:/pilipili/profiles/";
     public static final String MAC_PROFILES_PATH = "/Users/Gud/Workspace/temporaryFile/profiles/";
+
+    @Value("${pilipili.movie.page.size}")
+    int size;
 
     final
     MovieRepo movieRepo;
@@ -86,8 +93,9 @@ public class MovieServiceImpl implements MovieService {
         if (!newProfile.isEmpty()) {
 
             // 路径存库
-            String newProfileName = profilesPath + System.currentTimeMillis() + newProfile.getOriginalFilename();
+            String newProfileName =  System.currentTimeMillis() + newProfile.getOriginalFilename();
             movie.setImageDirectory(newProfileName);
+            newProfileName=profilesPath +newProfileName;
             movieRepo.save(movie);
 
             // 磁盘保存
@@ -117,16 +125,31 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public byte[] getImage(long movieId) {
+        String OSName = System.getProperty("os.name");
+        String profilesPath = OSName.toLowerCase().startsWith("win") ? WINDOWS_PROFILES_PATH
+                : MAC_PROFILES_PATH;
         Optional<Movie> movie=movieRepo.findById(movieId);
         byte[] imageContent=null;
         if(movie.isPresent()){
             String imageDirectory=movie.get().getImageDirectory();
             try {
-                imageContent = FileUtil.imageToByte(new File(imageDirectory));
+                imageContent = FileUtil.imageToByte(new File(profilesPath+imageDirectory));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return imageContent;
+    }
+
+    @Override
+    public List<Movie> getList(int page) {
+        Pageable pageable =PageRequest.of(page,size);
+        return  movieRepo.findAll(pageable).getContent();
+    }
+
+    @Override
+    public List<Movie> getListSortedByScoreDESC(int page) {
+        Pageable pageable =PageRequest.of(page,size,Sort.by(Sort.Direction.DESC,"score"));
+        return movieRepo.findAll(pageable).getContent();
     }
 }

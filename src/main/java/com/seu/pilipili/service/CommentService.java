@@ -21,5 +21,30 @@ public interface CommentService {
 
     Comment modifyApprovalNum(long commentId,boolean change);
 
+    /**
+     * 获取所有评论
+     * @param movieId
+     * @return
+     */
     List<Comment> getCommentsByMovieId(long movieId);
+
+    /**
+     * 随机分页评论
+     * @return
+     */
+    List<Comment> getPage(int page);
+
+    /**
+     * 按时间倒序分页
+     * @param page
+     * @return
+     */
+    List<Comment> getPageSortedByCreatedAtDESC(int page);
+
+    /**
+     * 按点赞数倒序分页
+     * @param page
+     * @return
+     */
+    List<Comment> getPageSortedByApprovalNumDESC(int page);
 }
