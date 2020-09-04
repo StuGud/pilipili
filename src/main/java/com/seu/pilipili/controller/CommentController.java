@@ -48,11 +48,11 @@ public class CommentController {
     @ResponseBody
     public Comment approve(@PathVariable("commentId") long commentId,String username,String password){
         User user= userService.login(username,password);
-        if(user.getApprovalNum()>=0){
+        if(user.getApprovalNum()>0){
             userService.modifyApprovalNum(user.getId(), false);
             return commentService.modifyApprovalNum(commentId,true);
         }else{
-            return null;
+            return commentService.getByCommentId(commentId);
         }
     }
 
