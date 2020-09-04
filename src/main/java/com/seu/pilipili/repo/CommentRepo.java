@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface CommentRepo extends PagingAndSortingRepository<Comment,Long> {
     List<Comment> findAllByMovieId(long movieId);
-    List<Comment> findAllByMovieId(long movieId,Pageable pageable);
+    //List<Comment> findAllByMovieId(long movieId,Pageable pageable);
 }

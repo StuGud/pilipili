@@ -8,6 +8,7 @@ import com.seu.pilipili.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -54,7 +55,7 @@ public class CommentController {
 
     @GetMapping("/findByMovieId/details/{movieId}")
     @ResponseBody
-    public List<CommentDetails> showCommentDetailsListByMovieId(@PathVariable("movieId") long movieId){
+    public List<CommentDetails> showCommentDetailsListByMovieId(@PathVariable("movieId") long movieId) throws IOException {
         return commentService.getCommentsDetailsByMovieId(movieId);
     }
 }
