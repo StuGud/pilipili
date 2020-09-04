@@ -31,14 +31,17 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment newComment(Comment comment) {
+        Comment save=new Comment();
         if(comment.getScore()<0){
-            comment.setScore(5);
+            save.setScore(5);
         }else if (comment.getScore()>10){
-            comment.setScore(10);
+            save.setScore(10);
+        }else{
+            save.setScore(comment.getScore());
         }
-        comment.setApprovalNum(0);
-        comment.setCreatedAt(new Date());
-        return commentRepo.save(comment);
+        save.setApprovalNum(0);
+        save.setCreatedAt(new Date());
+        return commentRepo.save(save);
     }
 
     @Override
