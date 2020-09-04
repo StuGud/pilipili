@@ -4,7 +4,6 @@ import com.seu.pilipili.entity.User;
 import com.seu.pilipili.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -27,13 +26,14 @@ public class UserController {
     @ResponseBody
     public User login(User user){
         User loginUser = userService.login(user.getUsername(), user.getPassword());
-        loginUser.setPassword("你猜");
         return loginUser;
+//        return testUser;
     }
 
     @PostMapping("/register")
     @ResponseBody
     public User register(User user){
+        System.out.println(user);
         if(userService.existsUsername(user.getUsername())){
             return null;
         }else{
@@ -57,6 +57,7 @@ public class UserController {
     @GetMapping("/{userId}")
     @ResponseBody
     public User showDetails(@PathVariable("userId") long userId){
+        System.out.println(userId);
         return userService.getDetails(userId);
     }
 }

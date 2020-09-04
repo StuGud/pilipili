@@ -27,7 +27,10 @@ public class CommentController {
     @PostMapping()
     @ResponseBody
     public Comment newComment(Comment comment){
+        System.out.println(comment);
         return commentService.newComment(comment);
+
+
     }
 
     @GetMapping("/findByMovieId/{movieId}")

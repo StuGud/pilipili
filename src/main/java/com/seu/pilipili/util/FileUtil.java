@@ -4,6 +4,7 @@ import com.seu.pilipili.entity.Comment;
 import com.seu.pilipili.entity.CommentDetails;
 import com.seu.pilipili.entity.User;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class FileUtil {
     @Value("${pilipili.profilePath.WIN}")
     private static String WINDOWS_PROFILES_PATH;
@@ -42,7 +44,7 @@ public class FileUtil {
         String OSName = System.getProperty("os.name");
         String profilesPath = OSName.toLowerCase().startsWith("win") ? WINDOWS_PROFILES_PATH
                 : MAC_PROFILES_PATH;
-        byte[] b = Files.readAllBytes(Paths.get(profilesPath + relativePath));
+        byte[] b = Files.readAllBytes(Paths.get("D:/pilipili/profiles/" + relativePath));
         return Base64.getEncoder().encodeToString(b);
     }
 }

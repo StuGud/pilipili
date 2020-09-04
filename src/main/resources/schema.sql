@@ -4,9 +4,9 @@ create table if not exists t_user
     username varchar(32) not null ,
     password varchar(16) not null ,
     mail varchar(64) not null ,
-    level varchar(8) not null default '普通会员',
-    profileURL varchar(128) not null,
-    approvalNum int not null default 3
+    level varchar(8)  default '普通会员',
+    profileURL varchar(128) ,
+    approvalNum int default 3
 );
 
 create table if not exists t_movie
