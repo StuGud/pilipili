@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Optional;
 
 @Service
@@ -88,6 +92,20 @@ public class UserServiceImpl implements UserService {
         if(user.isPresent()){
             String imageDirectory=user.get().getProfileURL();
             return new File(profilesPath+imageDirectory);
+        }
+        return null;
+    }
+
+    @Override
+    public String getProfileBase64(long userId) throws IOException {
+        String OSName = System.getProperty("os.name");
+        String profilesPath = OSName.toLowerCase().startsWith("win") ? WINDOWS_PROFILES_PATH
+                : MAC_PROFILES_PATH;
+        Optional<User> user=userRepo.findById(userId);
+        if(user.isPresent()){
+            String imageDirectory=user.get().getProfileURL();
+            byte[] b = Files.readAllBytes(Paths.get(profilesPath+imageDirectory));
+            return Base64.getEncoder().encodeToString(b);
         }
         return null;
     }

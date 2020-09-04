@@ -4,6 +4,8 @@ import com.seu.pilipili.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 
 //注册，是否存在用户名，登陆
 public interface UserService {
@@ -37,6 +39,8 @@ public interface UserService {
     User setProfile(long userId, MultipartFile newProfile);
 
     File getProfile(long userId);
+
+    String getProfileBase64(long userId) throws IOException;
 
     User getDetails(long userId);
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/user")
@@ -45,6 +46,12 @@ public class UserController {
     @ResponseBody
     public File showProfile(@PathVariable("userId") long userId){
         return userService.getProfile(userId);
+    }
+
+    @GetMapping("/{userId}/profileBase64")
+    @ResponseBody
+    public String showProfileBase64(@PathVariable("userId") long userId) throws IOException {
+        return userService.getProfileBase64(userId);
     }
 
     @GetMapping("/{userId}")
