@@ -32,6 +32,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment newComment(Comment comment) {
         Comment save=new Comment();
+        save.setMovieId(comment.getMovieId());
+        save.setContent(comment.getContent());
+        save.setUserId(comment.getUserId());
         if(comment.getScore()<0){
             save.setScore(5);
         }else if (comment.getScore()>10){
