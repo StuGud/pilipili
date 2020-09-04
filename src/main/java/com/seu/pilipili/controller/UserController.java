@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -31,8 +33,17 @@ public class UserController {
     @PostMapping("/register")
     @ResponseBody
     public User register(User user){
-        User registerUser = userService.register(user);
-        return registerUser;
+        if(userService.existsUsername(user.getUsername())){
+            return null;
+        }else{
+            User registerUser = userService.register(user);
+            return registerUser;
+        }
     }
 
+    @GetMapping("/{userId}/profile")
+    @ResponseBody
+    public File showProfile(@PathVariable("userId") long userId){
+        return userService.getProfile(userId);
+    }
 }
