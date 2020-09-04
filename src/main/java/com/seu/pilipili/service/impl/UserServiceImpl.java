@@ -91,4 +91,15 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public User getDetails(long userId) {
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+            user.setPassword("你猜");
+            return user;
+        }
+        return null;
+    }
 }

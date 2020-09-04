@@ -37,4 +37,6 @@ public interface UserService {
     User setProfile(long userId, MultipartFile newProfile);
 
     File getProfile(long userId);
+
+    User getDetails(long userId);
 }

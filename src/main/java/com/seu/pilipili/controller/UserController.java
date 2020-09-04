@@ -46,4 +46,10 @@ public class UserController {
     public File showProfile(@PathVariable("userId") long userId){
         return userService.getProfile(userId);
     }
+
+    @GetMapping("/{userId}")
+    @ResponseBody
+    public User showDetails(@PathVariable("userId") long userId){
+        return userService.getDetails(userId);
+    }
 }
