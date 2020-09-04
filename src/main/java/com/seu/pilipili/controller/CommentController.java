@@ -1,6 +1,7 @@
 package com.seu.pilipili.controller;
 
 import com.seu.pilipili.entity.Comment;
+import com.seu.pilipili.entity.CommentDetails;
 import com.seu.pilipili.entity.User;
 import com.seu.pilipili.service.CommentService;
 import com.seu.pilipili.service.UserService;
@@ -49,5 +50,11 @@ public class CommentController {
         }else{
             return null;
         }
+    }
+
+    @GetMapping("/findByMovieId/details/{movieId}")
+    @ResponseBody
+    public List<CommentDetails> showCommentDetailsListByMovieId(@PathVariable("movieId") long movieId){
+        return commentService.getCommentsDetailsByMovieId(movieId);
     }
 }

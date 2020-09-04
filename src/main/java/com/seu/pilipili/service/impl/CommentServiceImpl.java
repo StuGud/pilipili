@@ -1,10 +1,12 @@
 package com.seu.pilipili.service.impl;
 
 import com.seu.pilipili.entity.Comment;
+import com.seu.pilipili.entity.CommentDetails;
 import com.seu.pilipili.entity.Movie;
 import com.seu.pilipili.entity.User;
 import com.seu.pilipili.repo.CommentRepo;
 import com.seu.pilipili.service.CommentService;
+import com.seu.pilipili.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -21,12 +23,15 @@ public class CommentServiceImpl implements CommentService {
 
     final
     CommentRepo commentRepo;
+    final
+    UserService userService;
 
     @Value("${pilipili.comment.page.size}")
     int size;
 
-    public CommentServiceImpl(CommentRepo commentRepo) {
+    public CommentServiceImpl(CommentRepo commentRepo, UserService userService) {
         this.commentRepo = commentRepo;
+        this.userService = userService;
     }
 
     @Override
@@ -91,5 +96,19 @@ public class CommentServiceImpl implements CommentService {
     public Comment getByCommentId(long commentId) {
         Optional<Comment> comment = commentRepo.findById(commentId);
         return comment.get();
+    }
+
+    @Override
+    public List<CommentDetails> getCommentsDetailsByMovieId(long movieId) {
+        List<Comment> comments = commentRepo.findAllByMovieId(movieId);
+        List<CommentDetails> commentDetailsList=null;
+        for(Comment comment:comments){
+            commentDetailsList.add(new CommentDetails(
+                    userService.getDetails(comment.getUserId()).getUsername(),
+                    userService.getProfile(comment.getUserId()),
+                    comment
+            ));
+        }
+        return commentDetailsList;
     }
 }
