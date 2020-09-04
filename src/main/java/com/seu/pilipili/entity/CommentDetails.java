@@ -11,6 +11,6 @@ import java.io.File;
 @AllArgsConstructor
 public class CommentDetails {
     String username;
-    File userProfile;
+    String userProfileBase64;
     Comment comment;
 }

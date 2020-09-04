@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -99,13 +100,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDetails> getCommentsDetailsByMovieId(long movieId) {
+    public List<CommentDetails> getCommentsDetailsByMovieId(long movieId) throws IOException {
         List<Comment> comments = commentRepo.findAllByMovieId(movieId);
         List<CommentDetails> commentDetailsList=null;
         for(Comment comment:comments){
             commentDetailsList.add(new CommentDetails(
                     userService.getDetails(comment.getUserId()).getUsername(),
-                    userService.getProfile(comment.getUserId()),
+                    userService.getProfileBase64(comment.getUserId()),
                     comment
             ));
         }

@@ -3,6 +3,7 @@ package com.seu.pilipili.service;
 import com.seu.pilipili.entity.Comment;
 import com.seu.pilipili.entity.CommentDetails;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface CommentService {
@@ -56,5 +57,5 @@ public interface CommentService {
      */
     Comment getByCommentId(long commentId);
 
-    List<CommentDetails> getCommentsDetailsByMovieId(long movieId);
+    List<CommentDetails> getCommentsDetailsByMovieId(long movieId) throws IOException;
 }
